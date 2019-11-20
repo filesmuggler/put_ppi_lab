@@ -1,6 +1,6 @@
 FROM ubuntu
 
-LABEL "krzysztof.stezala@student.put.poznan.pl"
+LABEL author="krzysztof.stezala@student.put.poznan.pl"
 LABEL version="1.0"
 
 ENV DEBIAN_FRONTEND=noninteractive
