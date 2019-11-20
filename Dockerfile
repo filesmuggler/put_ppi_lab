@@ -1,13 +1,15 @@
+FROM ubuntu
+
 MAINTAINER "krzysztof.stezala@student.put.poznan.pl"
 LABEL version="1.0"
 
-FROM ubuntu
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
 RUN apt-get install xfce4 -y
 RUN apt-get install xfce4-goodies -y
 RUN apt-get purge -y pm-utils xscreensaver*
 RUN apt-get install wget -y
+RUN apt-get install -y terminator firefox net-tools
 
 RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
