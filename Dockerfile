@@ -1,6 +1,6 @@
 FROM ubuntu
 
-MAINTAINER "krzysztof.stezala@student.put.poznan.pl"
+LABEL "krzysztof.stezala@student.put.poznan.pl"
 LABEL version="1.0"
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -34,6 +34,5 @@ RUN wget -qO- https://dl.bintray.com/tigervnc/stable/tigervnc-1.8.0.x86_64.tar.g
 RUN mkdir ~/.vnc
 RUN echo "123456" | vncpasswd -f >> ~/.vnc/passwd
 RUN chmod 600 ~/.vnc/passwd
-
 
 CMD ["/usr/bin/vncserver", "-fg"]
