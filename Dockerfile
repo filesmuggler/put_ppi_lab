@@ -27,9 +27,6 @@ RUN /bin/bash -c "source /opt/ros/melodic/setup.bash && \
 
 RUN /bin/bash -c "echo 'source ~/ros_ws/devel/setup.bash' >> /root/.bashrc"
 
-# ACC project files
-
-
 # VNC part
 EXPOSE 5901
 
