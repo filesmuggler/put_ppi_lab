@@ -1,6 +1,6 @@
 FROM ubuntu
 
-LABEL author="krzysztof.stezala@student.put.poznan.pl"
+MAINTAINER "krzysztof.stezala@student.put.poznan.pl"
 LABEL version="1.0"
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -9,7 +9,7 @@ RUN apt-get install xfce4 -y
 RUN apt-get install xfce4-goodies -y
 RUN apt-get purge -y pm-utils xscreensaver*
 RUN apt-get install wget -y
-RUN apt-get install -y terminator firefox net-tools
+RUN apt-get install -y terminator firefox net-tools git
 
 RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
@@ -27,6 +27,8 @@ RUN /bin/bash -c "source /opt/ros/melodic/setup.bash && \
 
 RUN /bin/bash -c "echo 'source ~/ros_ws/devel/setup.bash' >> /root/.bashrc"
 
+# ACC project files
+
 # VNC part
 EXPOSE 5901
 
@@ -35,4 +37,11 @@ RUN mkdir ~/.vnc
 RUN echo "123456" | vncpasswd -f >> ~/.vnc/passwd
 RUN chmod 600 ~/.vnc/passwd
 
-CMD ["/usr/bin/vncserver", "-fg"]
+# Create startup script
+RUN touch ~/startup.sh
+RUN echo "#!/bin/bash\n\
+          rm -rf .*\n\
+          rm -r *\n\
+          /usr/bin/vncserver -fg" > startup.sh
+
+ENTRYPOINT [ "bash ~/startup.sh" ] 
