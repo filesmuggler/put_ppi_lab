@@ -50,5 +50,6 @@ RUN /bin/bash -c "echo -e '/opt/ros/melodic/bin/roslaunch rosbridge_server rosbr
 RUN cp /root/startup.sh /etc/init.d/startup.sh
 RUN chmod +x /etc/init.d/startup.sh
 RUN update-rc.d startup.sh defaults 100
-ENTRYPOINT ["/etc/init.d/startup.sh","start"]
+CMD /etc/init.d/startup.sh -DFOREGROUND
+#ENTRYPOINT ["/etc/init.d/startup.sh","start"]
 
